@@ -6,13 +6,34 @@
 	import TailwindIndicator from '$lib/components/tailwind-indicator.svelte';
 	import { ModeWatcher } from 'mode-watcher';
 	import '@fontsource/poppins';
+	import { Toaster, toast } from 'svelte-sonner';
+	import { getFlash } from 'sveltekit-flash-message/client';
+
+	const flash = getFlash(page, {
+		clearOnNavigate: true
+	});
+
+	$: if ($flash) {
+		switch ($flash.type) {
+			case 'success':
+				toast.success($flash.message);
+				break;
+			case 'error':
+				toast.error($flash.message);
+				break;
+			default:
+				toast.info($flash.message);
+		}
+	}
 </script>
 
 <ModeWatcher />
+<Toaster />
+
 <svelte:head>
 	<title>Marble | Home</title>
 </svelte:head>
-<div class="font-poppins relative flex min-h-screen flex-col" id="page">
+<div class="relative flex min-h-screen flex-col font-poppins" id="page">
 	<Nav />
 	<div class="flex-1">
 		<slot />

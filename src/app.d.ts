@@ -9,7 +9,9 @@ declare global {
 		}
 		// interface Error {}
 		// interface Locals {}
-		// interface PageData {}
+		interface PageData {
+			flash?: { type: 'success' | 'error'; message: string };
+		}
 		interface Platform {
 			env: {
 				COUNTER: DurableObjectNamespace;

@@ -15,10 +15,8 @@ export const GET = async ({ url, cookies, locals }) => {
 	}
 	try {
 		const { getExistingUser, githubUser, createUser } = await githubAuth.validateCallback(code);
-		console.log('A');
 		const getUser = async () => {
 			const existingUser = await getExistingUser();
-			console.log('existingUser', existingUser);
 			if (existingUser) return existingUser;
 			// if email already exists return 400
 			const existingDatabaseUserWithEmail = await db.query.user.findFirst({
@@ -36,19 +34,14 @@ export const GET = async ({ url, cookies, locals }) => {
 					avatar: githubUser.avatar_url ?? null
 				}
 			});
-			console.log('user', user);
 			return user;
 		};
-
-		console.log('B');
 		const user = await getUser();
-		console.log('C');
 		const session = await auth.createSession({
 			userId: user.userId,
 			attributes: {}
 		});
 		locals.auth.setSession(session);
-		console.log('D');
 		return new Response(null, {
 			status: 302,
 			headers: {

@@ -6,7 +6,7 @@
 	export let data;
 </script>
 
-<main class="flex flex-1 flex-col items-center justify-center py-6">
+<main class="flex flex-1 flex-col items-center justify-center py-6 gap-6">
 	<h1 class="mt-36 scroll-m-20 font-quantify text-4xl font-extrabold tracking-wider lg:text-7xl">
 		Be Productive.
 	</h1>

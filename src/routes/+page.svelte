@@ -1,2 +1,40 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+	import { enhance } from '$app/forms';
+	import { goto } from '$app/navigation';
+	import BasilGoogleSolid from '~icons/basil/google-solid';
+	import BiGithub from '~icons/bi/github';
+	export let data;
+</script>
+
+<main class="flex flex-1 flex-col items-center justify-center py-6">
+	<h1 class="mt-36 scroll-m-20 font-quantify text-4xl font-extrabold tracking-wider lg:text-7xl">
+		Be Productive.
+	</h1>
+	<h2 class="scroll-m-20 text-2xl font-semibold lg:text-4xl">Get Started</h2>
+	<div class="flex items-center justify-center gap-4">
+		<!-- {JSON.stringify(data)} -->
+		{#if data.user}
+			<form method="post" action="?/logout" use:enhance>
+				<button
+					class="flex transform-gpu items-center justify-center transition-all duration-300 hover:scale-110"
+					type="submit"
+				>
+					Logout
+				</button>
+			</form>
+		{:else}
+			<button
+				class="flex transform-gpu items-center justify-center transition-all duration-300 hover:scale-110"
+				on:click={()=>goto('/auth/google')}
+			>
+				<BasilGoogleSolid font-size="64" />
+			</button>
+			<button
+				class="flex transform-gpu items-center justify-center transition-all duration-300 hover:scale-110"
+				on:click={()=>goto('/auth/github')}
+			>
+				<BiGithub font-size="64" />
+			</button>
+		{/if}
+	</div>
+</main>

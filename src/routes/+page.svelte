@@ -6,7 +6,7 @@
 	export let data;
 </script>
 
-<main class="flex flex-1 flex-col items-center justify-center py-6 gap-6">
+<main class="flex flex-1 flex-col items-center justify-center gap-6 py-6">
 	<h1 class="mt-36 scroll-m-20 font-quantify text-4xl font-extrabold tracking-wider lg:text-7xl">
 		Be Productive.
 	</h1>
@@ -14,6 +14,21 @@
 	<div class="flex items-center justify-center gap-4">
 		<!-- {JSON.stringify(data)} -->
 		{#if data.user}
+			{#await data.streamed.todos}
+				<p>Loading todos...</p>
+			{:then todos}
+				{#if todos?.length}
+					{#each todos as todo}
+						<div class="flex flex-col items-center justify-center gap-2">
+							<p>{todo.title}</p>
+						</div>
+					{/each}
+				{:else}
+					<p>No todos yet.</p>
+				{/if}
+			{:catch error}
+				<p>{error.message}</p>
+			{/await}
 			<form method="post" action="?/logout" use:enhance>
 				<button
 					class="flex transform-gpu items-center justify-center transition-all duration-300 hover:scale-110"

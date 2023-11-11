@@ -34,6 +34,7 @@ declare global {
 			email: string | null;
 			name: string | null;
 			avatar: string | null;
+			userId: string;
 		};
 		// eslint-disable-next-line @typescript-eslint/ban-types
 		type DatabaseSessionAttributes = {};

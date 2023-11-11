@@ -31,3 +31,12 @@ export const key = sqliteTable('user_key', {
 		.references(() => user.id),
 	hashedPassword: text('hashed_password')
 });
+
+export const todos = sqliteTable('todos', {
+	id: text('id').primaryKey(),
+	userId: text('user_id')
+		.notNull()
+		.references(() => user.id),
+	title: text('title'),
+	completed: text('completed')
+});

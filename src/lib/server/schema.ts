@@ -1,5 +1,5 @@
 // schema.js
-import { sqliteTable, text, blob } from 'drizzle-orm/sqlite-core';
+import { sqliteTable, text, blob, int } from 'drizzle-orm/sqlite-core';
 
 export const user = sqliteTable('user', {
 	id: text('id').primaryKey(),
@@ -33,10 +33,10 @@ export const key = sqliteTable('user_key', {
 });
 
 export const todos = sqliteTable('todos', {
-	id: text('id').primaryKey(),
+	id: int('id').primaryKey(),
 	userId: text('user_id')
 		.notNull()
 		.references(() => user.id),
 	title: text('title'),
-	completed: text('completed')
+	completed: int('completed').default(0)
 });

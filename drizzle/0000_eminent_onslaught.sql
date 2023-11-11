@@ -13,6 +13,14 @@ CREATE TABLE `user_session` (
 	FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
+CREATE TABLE `todos` (
+	`id` integer PRIMARY KEY NOT NULL,
+	`user_id` text NOT NULL,
+	`title` text,
+	`completed` integer DEFAULT 0,
+	FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON UPDATE no action ON DELETE no action
+);
+--> statement-breakpoint
 CREATE TABLE `user` (
 	`id` text PRIMARY KEY NOT NULL,
 	`github_username` text,
